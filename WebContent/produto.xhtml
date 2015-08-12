@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Produto</title>
+	<h:outputStylesheet library="css" name="styles-form.css"/>
+</h:head>
+<h:body>
+	<h:form>
+		<h:messages style="color:green"/>
+		<fieldset>
+			<legend>Cadastro</legend>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Nome:" for="nome" />
+				<h:inputText value="#{produtoBean.produto.nome}" id="nome" required="true" requiredMessage="Nome do produto deve ser informado.">
+					<h:message for="nome" style="color:red"/>
+				</h:inputText>
+				
+				<h:outputLabel value="Preço:" for="preco" />
+				<h:inputText id="preco"  value="#{produtoBean.produto.preco}" required="true" requiredMessage="Preço do produto deve ser informado.">
+					<h:message for="preco" style="color:red"/>	
+				</h:inputText>
+				
+				<h:outputLabel value="Exibir preço?" for="exibe"/>
+				<h:selectBooleanCheckbox value="#{produtoBean.produto.exibeProduto}" id="exibe"/>
+				
+			</h:panelGrid>
+			<h:commandButton action="#{produtoBean.gravarProduto()}" value="Gravar" />
+			<h:button outcome="#{produtoBean.listarProdutos()}" value="Listar" />
+		</fieldset>
+	</h:form>
+</h:body>
+</html>

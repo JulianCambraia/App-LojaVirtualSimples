@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Listagem de Produtos</title>
+	<h:outputStylesheet library="css" name="styles-table.css" />
+</h:head>
+<h:body>
+	<h:form id="lista-de-produtos">
+		<h:messages style="color:green" />
+		<h:dataTable id="tb" styleClass="employeeTable"
+			headerClass="employeeTableHeader"
+			rowClasses="employeeTableOddRow,employeeTableEvenRow" border="1"
+			value="#{produtoBean.produtos}" var="produto">
+			
+			<f:facet name="header">Lista de produtos</f:facet>
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				#{produto.nome}
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Preço</f:facet>
+				<h:outputText value="#{produto.preco}"
+					rendered="#{produto.exibeProduto.booleanValue()}" />
+				<h:outputText value="#{produtoBean.exibeMensagem()}"
+					rendered="#{not produto.exibeProduto}" />
+			</h:column>
+		</h:dataTable>
+		<h:link outcome="produto" value="Retornar"/>
+	</h:form>
+</h:body>
+</html>

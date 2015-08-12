@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Cadastro de Cliente</title>
+</h:head>
+<h:body>
+	<h:form>
+		<h1>Cliente</h1>
+		<fieldset>
+			<legend>Cadastro</legend>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Nome:" for="nome" />
+				<h:inputText value="#{usuarioBean.cliente.nome}" id="nome"/>
+				
+				<h:outputLabel value="Email:" for="email" />
+				<h:inputText value="#{usuarioBean.cliente.email}" id="email" />
+				
+				<h:outputLabel value="Telefone:" for="telefone"/>
+				<h:inputText value="#{usuarioBean.cliente.telefone}" id="telefone" />
+				
+				<h:outputLabel value="Sexo:" for="sexo"/>
+				<h:selectOneMenu value="#{usuarioBean.cliente.sexo}" id="sexo">
+					<f:selectItem itemLabel="Clique aqui para selecionar" noSelectionOption="true"/>
+					<f:selectItems value="#{usuarioBean.sexos.keySet()}"
+						var="sx"
+						itemLabel="#{sx}"
+						itemValue="#{sx}"
+					/>
+				</h:selectOneMenu>
+				
+				<h:outputLabel value="Número pedido:" for="numeropedido" />
+				<h:inputText value="#{usuarioBean.cliente.numeroPedido}" id="numeropedido"/>
+				
+			</h:panelGrid>
+			
+			<h:commandButton action="#{usuarioBean.preencheListCliente()}" value="Gravar" />
+			<h:commandButton action="#{usuarioBean.reset()}" value="Limpar" />
+		</fieldset>
+		
+	</h:form>
+	<h:outputText value="Não há dados a serem exibidos!" rendered="#{empty usuarioBean.exibeMsgListaVazia}" />
+	<h:dataTable border="1" value="#{usuarioBean.clientes}" var="cliente" rendered="#{not empty usuarioBean.clientes}">
+		<f:facet name="header">Lista de Clientes</f:facet>
+		<h:column>
+			<f:facet name="header">Número pedido</f:facet>
+			#{cliente.numeroPedido}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Nome</f:facet>
+			#{cliente.nome}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Email</f:facet>
+			#{cliente.email}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Telefone</f:facet>
+			#{cliente.telefone}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Sexo</f:facet>
+			#{cliente.sexo}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Ações</f:facet>
+		</h:column>
+	</h:dataTable>
+</h:body>
+</html>
